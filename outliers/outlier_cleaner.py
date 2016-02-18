@@ -10,11 +10,14 @@ def outlierCleaner(predictions, ages, net_worths):
         Return a list of tuples named cleaned_data where 
         each tuple is of the form (age, net_worth, error).
     """
-    
-    cleaned_data = []
-
     ### your code goes here
 
+    import numpy as np
+
+    errors = [abs(net_worths[key][0] - value[0]) for key, value in enumerate(predictions)]
     
-    return cleaned_data
+    to_keep_count = len(errors) - len(errors)/10
+    to_keep = np.argsort(errors)[:to_keep_count]
+
+    return [(ages[i], net_worths[i], errors[i]) for i in to_keep]
 
