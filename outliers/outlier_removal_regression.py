@@ -26,15 +26,14 @@ ages_train, ages_test, net_worths_train, net_worths_test = train_test_split(ages
 ### fill in a regression here!  Name the regression object reg so that
 ### the plotting code below works, and you can see what your regression looks like
 
+from sklearn.linear_model import LinearRegression
 
+reg = LinearRegression()
 
+reg.fit(ages_train, net_worths_train)
 
-
-
-
-
-
-
+print "Slope: ", reg.coef_[0][0]
+print "Score: ", reg.score(ages_test, net_worths_test)
 
 try:
     plt.plot(ages, reg.predict(ages), color="blue")
